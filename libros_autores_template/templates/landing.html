@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'js/style.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark p-4" style="background: linear-gradient(90deg, rgba(18,18,22,1) 0%, rgba(46,5,1,1) 46%, rgba(255,0,14,0.8) 100%);">
+        <a class="navbar-brand" href="#">Books & Authors</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/landing">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/authors">Authors</a>
+                </li>
+                <li class="nav-item dropdown d-none" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                <div class="dropdown-menu d-none" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="containerlanding" class="container-fluid">
+        <div class="row p-4 pt-4">
+            <h1 class="text-white display-1 text-center mt-4 fw-bolder">Books and Authors</h1>
+            <div class="ms-3 col-7 text-center align-bottom display-1">
+                
+                    <a href="/books" class="fw-bolder  btn btn-danger border border-light" name ='BOOKS'>Add Books</a>
+            
+            </div>
+            <div class="ms-4 col-2 text-center align-bottom display-1">
+                
+                    <a href="/authors" class="fw-bolder text-danger btn btn-light border border-danger" name ='AUTHORS'>Add Authors</a>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

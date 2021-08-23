@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'js/style.css' %}">
+    <title>authors</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark p-4" style="background: linear-gradient(90deg, rgba(18,18,22,1) 0%, rgba(46,5,1,1) 46%, rgba(255,0,14,0.8) 100%);">
+        <a class="navbar-brand" href="#">Books & Authors</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/landing">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/authors">Authors</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="cajitaautores" class="container-fluid p-4">
+        <div class="row p-4">
+            <h1 class="text-white p-3 text-center display-1 fw-bolder">Authors</h1>
+            <div class="offset-1 col-5 p-4">
+                <form id="form" class="offset-1 col-10 bg-dark p-4 text-white" method="POST" action="/addauthor">
+                    <div class="row">
+                        <h4 class="text-white  m-1">Add an Author</h4>
+                        <div class="input-field col-12 m-1">
+                            {% csrf_token %}
+                            <input name="first_name_input" type="text" class="validate" required>
+                            <label for="description">First Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col-12 m-1">
+                            {% csrf_token %}
+                            <input name="last_name_input" type="text" class="validate" required>
+                            <label for="last_name_input">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col-12 m-1">
+                            {% csrf_token %}
+                            <input name="desc_authors_input" type="text" class="validate" required>
+                            <label for="desc">Notes</label>
+                        </div>
+                    </div>
+                    <div class="row  p-1">
+                        <div class="col-5 input-field">
+                            <input type="submit" class="btn btn-danger">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-5 p-4">
+                <table class="table table-hover p-4">
+                    <thead>
+                        <tr class="text-white bg-dark">
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col"></th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for aut in authors %}
+                        <tr>
+                            <td class="table-light">{{aut.id}}</td>
+                            <td class="table-light">{{aut.first_name}}</td>
+                            <td class="table-light">{{aut.last_name}}</td>
+                            <td class="table-light"> <a nam= {{aut.id}} href="/authors/{{aut.id}}">View</a></td>
+                        </tr>   
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

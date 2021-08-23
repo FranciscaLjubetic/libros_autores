@@ -1,0 +1,132 @@
+ Consulta: crea 5 libros con los siguientes nombres: C Sharp, Java, Python, PHP, Ruby
+
+libro1= books.objects.create(title ='C Sharp', desc = 'Hermosa novela. Entretención garantizada')
+libro2= books.objects.create(title ='Java', desc = 'Cuento fantàstico')
+libro3= books.objects.create(title ='Python', desc = 'Quien ama lo más bello, piensa lo más profundo')
+libro4= books.objects.create(title ='PHP', desc = 'Análisis de la deontología de tía Pikachu')
+libro5= books.objects.create(title ='Ruby', desc = 'Si me das problemas, te daré la tumba. Poemario de un defensor de la democracia')
+
+ Consulta: Crea 5 autores diferentes: Jane Austen, Emily Dickinson, Fyodor Dostoevksy, William Shakespeare, Lau Tzu
+author1 = Authors.objects.create(first_name='Jane', last_name='Austen')
+author2 = Authors.objects.create(first_name='Emily', last_name='Dickinson')
+author3 = Authors.objects.create(first_name='Fyodor', last_name='Dostoevksy')
+author4 = Authors.objects.create(first_name='William', last_name='Shakespeare')
+author4 = Authors.objects.create(first_name='Lau', last_name='Tzu')
+
+ Agregue un nuevo campo de texto en la tabla de autores llamado 'notas'.
+ Cree y ejecute los archivos de migración para actualizar la tabla en su base de datos.
+ $ python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to authors without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> timezone.now
+Migrations for 'libros_autores_template':
+  libros_autores_template\migrations\0002_authors_desc.py
+    - Add field desc to authors
+(bloq_env)
+
+ Consulta: cambie el nombre del libro de C Sharp a C #
+
+
+cambiarcsharp = books.objects.get(id=1)
+cambiarcsharp.name = 'C #'
+cambiarcsharp
+Out[5]: <books: books object (1)>
+
+In [6]: cambiarcsharp.save()
+
+cambiarcsharp.save()
+
+ Consulta: cambie el nombre del cuarto autor a Bill
+    cambiarcuartobill = Authors.objects.get(id= 4)
+    cambiarcuartobill.name = 'Bill'
+    cambiarcuartobill.save()
+
+ Consulta: Asigna el primer autor a los primeros 2 libros.
+
+primerautor = Authors.objects.first()
+primerautor
+primerautor.book.add(libro1)
+primerautor.book.add(libro2)
+Out[12]: <Authors: Authors object (1)>
+
+
+ Consulta: Asigne el segundo autor a los primeros 3 libros.
+autor2_3firstbooks = Authors.objects.get(id=2)	# recuperar una instancia de un editor
+libro1 = books.objects.get(id=1)
+libro2 = books.objects.get(id=2)
+libro3 = books.objects.get(id=3)
+
+autor2_3firstbooks.book.add(libro1)
+autor2_3firstbooks.add(libro1)
+
+autor2_3firstbooks.book.add(libro2)
+autor2_3firstbooks.book.add(libro3)
+        
+    
+# 2 opciones que hacen lo mismo:
+this_publisher.books.add(this_book)		# añadir el libro a la lista de libros de esta editorial
+this_book.publishers.add(this_publisher)
+# o en una línea...
+my_book = Book.objects.create(title="Little Women", author=Author.objects.get(id=2))
+
+ Consulta: Asigna el tercer autor a los primeros 4 libros.
+autor3 = Authors.objects.get(id=3)
+libro4 = books.objects.get(id=4)
+libro4.authors.add(autor3)
+libro3.authors.add(autor3)
+libro2.authors.add(autor3)
+libro1.authors.add(autor3)
+
+ 
+ Consulta: Asigne el cuarto autor a los primeros 5 libros (o en otras palabras, todos los libros)
+autor4 = Authors.objects.get(id=4)
+libro5 = books.objects.get(id=5)
+libro5.authors.add(autor4)
+libro4.authors.add(autor4)
+libro3.authors.add(autor4)
+libro2.authors.add(autor4)
+libro1.authors.add(autor4)
+
+
+ Consulta: recupera a todos los autores del tercer libro
+ autoreslibro3 = libro3.authors.all()
+ autoreslibro3
+Out[34]: <QuerySet [<Authors: Authors object (2)>, <Authors: Authors object (4)>, <Authors: Authors object (3)>]>
+
+In [35]: autoreslibro3.values()
+Out[35]: <QuerySet [{'id': 2, 'first_name': 'Emily', 'last_name': 'Dickinson', 'desc': '2021-08-10 20:08:23.497209+00:00', 'created_at': datetime.datetime(2021, 8, 10, 20, 4, 
+14, 354234, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 20, 4, 14, 354234, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'William', 'last_name': 'Shakespeare', 'desc': '2021-08-10 20:08:23.497209+00:00', 'created_at': datetime.datetime(2021, 8, 10, 20, 4, 36, 983710, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 20, 4, 36, 983710, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'desc': '2021-08-10 20:08:23.497209+00:00', 'created_at': datetime.datetime(2021, 8, 10, 20, 4, 23, 284265, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 20, 4, 23, 284265, tzinfo=<UTC>)}]>
+ 
+ 
+ Consulta: eliminar al primer autor del tercer libro
+primerautorlibro3 = libro3.authors.first()
+libro3.authors.remove(primerautorlibro3)
+
+ Consulta: Agregue el quinto autor como uno de los autores del segundo libro.
+autor5 = Authors.objects.last()
+libro2.authors.add(autor5)
+
+ Consulta: Encuentra todos los libros de los que el tercer autor es parte
+autor3.book.all()
+autor3.book.all()
+Out[41]: <QuerySet [<books: books object (1)>, <books: books object (2)>, <books: books object (3)>, <books: books object (4)>]>
+
+In [42]: autor3.books.all().values()
+Out[42]: <QuerySet [{'id': 1, 'title': 'C Sharp', 'desc': 'Hermosa novela. Entretención garantizada', 'created_at': datetime.datetime(2021, 8, 10, 19, 57, 54, 975599, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 22, 30, 18, 355240, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': 'Cuento fantàstico', 'created_at': datetime.datetime(2021, 8, 10, 19, 58, 4, 20443, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 19, 58, 4, 20443, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': 'Quien ama lo más bello, piensa lo más profundo', 'created_at': datetime.datetime(2021, 8, 10, 19, 58, 20, 664562, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 19, 58, 20, 
+664562, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': 'Análisis de la deontología de tía Pikachu', 'created_at': datetime.datetime(2021, 8, 10, 19, 58, 22, 601639, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 22, 36, 52, 413639, tzinfo=<UTC>)}]>
+
+ Consulta: Encuentra todos los autores que contribuyeron al quinto libro.
+
+ libro5.authors.all().values()
+ libro5.authors.all()
+Out[43]: <QuerySet [<Authors: Authors object (4)>]>
+
+In [44]: libro5.authors.all().values()
+Out[44]: <QuerySet [{'id': 4, 'first_name': 'William', 'last_name': 'Shakespeare', 'desc': '2021-08-10 20:08:23.497209+00:00', 'created_at': datetime.datetime(2021, 8, 10, 20, 4, 36, 983710, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 8, 10, 20, 4, 36, 983710, tzinfo=<UTC>)}]>
+ Envíe su archivo .txt que contiene todas las consultas que ejecutó en el shell

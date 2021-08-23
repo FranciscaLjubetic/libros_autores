@@ -1,0 +1,25 @@
+#containerlanding {
+    background-image: url('https://images.pexels.com/photos/1907784/pexels-photo-1907784.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    -o-object-fit: cover;
+    min-width: 900px;
+    min-height: 600px;
+}
+
+#cajitalibros, #cajitalibrosform{
+    background-image: url('https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    -o-object-fit: cover;
+    min-width: 900px;
+    min-height: 600px;
+}
+
+#cajitaautores, #cajitaautoresform{
+    background-image: url('https://images.pexels.com/photos/5698415/pexels-photo-5698415.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    -o-object-fit: cover;
+    min-width: 900px;
+    min-height: 600px;
+}
+
+#bookdescription, #authornotes {
+    min-height: 150px;
+    overflow-y: scroll;
+}
